@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
-import 'package:kapil_portfolio/presentation/pages/home.dart';
+import 'package:kapil_portfolio/presentation/pages/home/home.dart';
 
 void main() {
   runApp(const MyApp());

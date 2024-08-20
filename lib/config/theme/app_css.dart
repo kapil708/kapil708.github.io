@@ -20,7 +20,7 @@ class AppCss {
   static TextStyle get h5 => sora.semiBold.size(22).textHeight(1.2);
   static TextStyle get h6 => sora.semiBold.size(18).textHeight(1.2);
 
-  static TextStyle get lead => sora.semiBold.size(20);
+  static TextStyle get lead => sora.regular.size(20);
   static TextStyle get subTitle => sora.semiBold.size(36);
 
   static TextStyle get body => sora.size(16).textHeight(1.30);
