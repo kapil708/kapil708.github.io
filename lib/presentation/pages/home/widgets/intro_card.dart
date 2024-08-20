@@ -32,7 +32,8 @@ class IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "I am Kapil",
+                      "Hi, 👋"
+                      " i am Kapil",
                       style: AppCss.subTitle.copyWith(
                         color: CustomColors.c1,
                       ),
@@ -40,7 +41,7 @@ class IntroCard extends StatelessWidget {
                     ),
                     const VSpace(16),
                     Text(
-                      "Mobile App \nDeveloper",
+                      "📱Mobile App \nDeveloper...",
                       style: AppCss.h1.copyWith(
                         color: CustomColors.c2,
                       ),
@@ -108,7 +109,11 @@ class IntroCard extends StatelessWidget {
               ),
               SizedBox(
                 width: contentWidth * 0.5,
-                child: Image.network("https://themejunction.net/html/gerold/demo/assets/img/hero/me.png"),
+                child: Image.asset(
+                  "assets/images/kapil.png",
+                  height: 600,
+                ),
+                // child: Image.network("https://themejunction.net/html/gerold/demo/assets/img/hero/me.png"),
               ),
             ],
           ),
