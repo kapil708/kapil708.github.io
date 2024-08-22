@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
+import 'package:kapil_portfolio/core/model/index.dart';
 import 'package:kapil_portfolio/core/utils/helper.dart';
 
 class IntroCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class IntroCard extends StatelessWidget {
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
     return Container(
-      color: const Color(0xFFFFFFFF),
+      color: const Color(0xFFF6F3Fc),
       width: windowWidth,
       padding: EdgeInsets.only(
         left: AppCss.kBodyPaddingHorizontal,
@@ -24,6 +25,7 @@ class IntroCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Welcome message & image
           Row(
             children: [
               SizedBox(
@@ -32,8 +34,7 @@ class IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hi, 👋"
-                      " i am Kapil",
+                      IntroModel.subTitle,
                       style: AppCss.subTitle.copyWith(
                         color: CustomColors.c1,
                       ),
@@ -41,7 +42,7 @@ class IntroCard extends StatelessWidget {
                     ),
                     const VSpace(16),
                     Text(
-                      "📱Mobile App \nDeveloper...",
+                      IntroModel.title,
                       style: AppCss.h1.copyWith(
                         color: CustomColors.c2,
                       ),
@@ -49,9 +50,7 @@ class IntroCard extends StatelessWidget {
                     ),
                     const VSpace(16),
                     Text(
-                      "I break down complex user experinece problems to "
-                      "create integritiy focussed solutions that connect "
-                      "billions of people",
+                      IntroModel.description,
                       style: AppCss.lead,
                       //style: Theme.of(context).textTheme.titleLarge,
                     ),
@@ -60,48 +59,34 @@ class IntroCard extends StatelessWidget {
                       children: [
                         FilledButton(
                           onPressed: () {},
-                          style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 17),
-                          ),
+                          style: AppCss.buttonStyle,
                           child: Text(
                             "Hire Me!",
-                            style: AppCss.btn,
+                            style: AppCss.body,
                           ),
                         ),
                         const HSpace(32),
-                        OutlinedButton(
-                          onPressed: () => openUrl('https://www.linkedin.com/in/kapilrsingh'),
-                          style: IconButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                              side: const BorderSide(color: CustomColors.primary),
+                        ...IntroModel.socialLinks.map((socialLink) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: OutlinedButton(
+                              onPressed: () => openUrl(socialLink['link']),
+                              style: IconButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                  side: const BorderSide(color: CustomColors.primary),
+                                ),
+                                minimumSize: const Size(48, 48),
+                              ),
+                              child: Image.asset(
+                                socialLink['image'],
+                                height: 24,
+                                width: 24,
+                              ),
                             ),
-                            minimumSize: const Size(48, 48),
-                          ),
-                          child: Image.network(
-                            "https://cdn-icons-png.flaticon.com/512/3128/3128219.png",
-                            height: 24,
-                            width: 24,
-                          ),
-                        ),
-                        const HSpace(16),
-                        OutlinedButton(
-                          onPressed: () => openUrl('https://github.com/kapil708'),
-                          style: IconButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                              side: const BorderSide(color: CustomColors.primary),
-                            ),
-                            minimumSize: const Size(48, 48),
-                          ),
-                          child: Image.network(
-                            "https://cdn-icons-png.flaticon.com/512/2111/2111432.png",
-                            height: 24,
-                            width: 24,
-                          ),
-                        ),
+                          );
+                        }),
                       ],
                     ),
                   ],
@@ -110,72 +95,91 @@ class IntroCard extends StatelessWidget {
               SizedBox(
                 width: contentWidth * 0.5,
                 child: Image.asset(
-                  "assets/images/kapil.png",
+                  IntroModel.profilePicture,
                   height: 600,
                 ),
                 // child: Image.network("https://themejunction.net/html/gerold/demo/assets/img/hero/me.png"),
               ),
             ],
           ),
+
+          // Records
+          const VSpace(32),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "09+",
-                    style: AppCss.h1.copyWith(
-                      color: CustomColors.c2,
+              ...IntroModel.records.map((record) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      record['count'],
+                      style: AppCss.h1.copyWith(
+                        color: CustomColors.c2,
+                      ),
                     ),
-                  ),
-                  const HSpace(8),
-                  Text(
-                    "Years of \nExperience",
-                    style: AppCss.body.copyWith(
-                      color: CustomColors.c2,
+                    const HSpace(8),
+                    Text(
+                      record['title'],
+                      style: AppCss.body.copyWith(
+                        color: CustomColors.c2,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "50+",
-                    style: AppCss.h1.copyWith(
-                      color: CustomColors.c2,
-                    ),
-                  ),
-                  const HSpace(8),
-                  Text(
-                    "Project \nCompleted",
-                    style: AppCss.body.copyWith(
-                      color: CustomColors.c2,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "10+",
-                    style: AppCss.h1.copyWith(
-                      color: CustomColors.c2,
-                    ),
-                  ),
-                  const HSpace(8),
-                  Text(
-                    "Happy \Clients",
-                    style: AppCss.body.copyWith(
-                      color: CustomColors.c2,
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              }),
             ],
           ),
+
+          // Trusted by
+          // const VSpace(64),
+          // Center(
+          //   child: Text(
+          //     "Some Brands We Work With",
+          //     style: AppCss.h5.copyWith(
+          //       color: CustomColors.c1,
+          //     ),
+          //   ),
+          // ),
+          // const VSpace(16),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Container(
+          //       //padding: const EdgeInsets.only(right: 32),
+          //       constraints: const BoxConstraints(
+          //         maxWidth: 200,
+          //         maxHeight: 100,
+          //       ),
+          //       child: Image.network("https://4106085.fs1.hubspotusercontent-na1.net/hub/4106085/hubfs/neu_Care%20Rockets.png"),
+          //     ),
+          //     Container(
+          //       //padding: const EdgeInsets.only(right: 32),
+          //       constraints: const BoxConstraints(
+          //         maxWidth: 200,
+          //         maxHeight: 100,
+          //       ),
+          //       child: Image.network("https://www.fastwhistle.com/assets/img/fastwhistle.png"),
+          //     ),
+          //     Container(
+          //       //padding: const EdgeInsets.only(right: 32),
+          //       constraints: const BoxConstraints(
+          //         maxWidth: 200,
+          //         maxHeight: 100,
+          //       ),
+          //       child: Image.network("https://omtapovan.org/wp-content/uploads/main_round.png"),
+          //     ),
+          //     Container(
+          //       //padding: const EdgeInsets.only(right: 32),
+          //       constraints: const BoxConstraints(
+          //         maxWidth: 200,
+          //         maxHeight: 100,
+          //       ),
+          //       child: Image.network(
+          //           "https://scontent.famd5-2.fna.fbcdn.net/v/t39.30808-1/273454088_101439172467347_6173678911554987289_n.jpg?stp=dst-jpg_s480x480&_nc_cat=104&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=3J6_rR1eplcQ7kNvgHulFMi&_nc_ht=scontent.famd5-2.fna&oh=00_AYBYigKY1GUYZARpB3_G6kRRbi_SndE_yYIA3g697_4mpQ&oe=66CB4EAD"),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

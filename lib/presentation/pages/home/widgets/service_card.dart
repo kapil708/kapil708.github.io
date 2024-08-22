@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
+import 'package:kapil_portfolio/core/model/index.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({super.key});
@@ -12,7 +13,8 @@ class ServiceCard extends StatelessWidget {
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
     return Container(
-      color: const Color(0xFFF6F3Fc),
+      color: const Color(0xFFFFFFFF),
+      // color: const Color(0xFFF6F3Fc),
       width: windowWidth,
       padding: EdgeInsets.only(
         left: AppCss.kBodyPaddingHorizontal,
@@ -22,19 +24,81 @@ class ServiceCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-            "My Quality Services",
-            style: AppCss.h2.copyWith(
-              color: CustomColors.c1,
-            ),
+          // Intro of service
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Text(
+                  ServiceModel.title,
+                  style: AppCss.h1.copyWith(
+                    color: CustomColors.c1,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Image.network(ServiceModel.serviceImage),
+              ),
+            ],
           ),
-          const VSpace(16),
+          const VSpace(32),
           Text(
-            "We put your ideas and thus your wishes in the form of a unique web project "
-            "\nthat inspires you and you customers.",
-            style: AppCss.p,
+            ServiceModel.description,
+            style: AppCss.bodyL,
             textAlign: TextAlign.center,
           ),
+          const VSpace(64),
+
+          // Service
+          ...ServiceModel.serviceList.map((service) {
+            int index = ServiceModel.serviceList.indexWhere((s) => s['title'] == service['title']);
+            print(index);
+            return Row(
+              children: [
+                if (index % 2 == 0) ...[
+                  Expanded(
+                    flex: 1,
+                    child: Image.network(service['image']),
+                  ),
+                  const HSpace(140),
+                ],
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        service['title'],
+                        style: AppCss.h4.copyWith(
+                          color: CustomColors.c1,
+                        ),
+                      ),
+                      const VSpace(16),
+                      Text(
+                        service['subTitle'],
+                        style: AppCss.h2.copyWith(
+                          color: CustomColors.c1,
+                        ),
+                      ),
+                      const VSpace(16),
+                      Text(
+                        service['description'],
+                        style: AppCss.body,
+                      ),
+                    ],
+                  ),
+                ),
+                if (index % 2 == 1) ...[
+                  const HSpace(140),
+                  Expanded(
+                    flex: 1,
+                    child: Image.network(service['image']),
+                  ),
+                ],
+              ],
+            );
+          }),
         ],
       ),
     );

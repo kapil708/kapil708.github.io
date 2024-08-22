@@ -32,7 +32,7 @@ class SkillCard extends StatelessWidget {
           Text(
             "We put your ideas and thus your wishes in the form of a unique web project "
             "\nthat inspires you and you customers.",
-            style: AppCss.p,
+            style: AppCss.bodyL,
             textAlign: TextAlign.center,
           ),
         ],

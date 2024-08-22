@@ -12,7 +12,7 @@ class BlogCard extends StatelessWidget {
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
     return Container(
-      color: const Color(0xFFF6F3FC),
+      color: const Color(0xFFF1EAFF),
       width: windowWidth,
       padding: EdgeInsets.only(
         left: AppCss.kBodyPaddingHorizontal,
@@ -32,7 +32,7 @@ class BlogCard extends StatelessWidget {
           Text(
             "We put your ideas and thus your wishes in the form of a unique web project "
             "\nthat inspires you and you customers.",
-            style: AppCss.p,
+            style: AppCss.bodyL,
             textAlign: TextAlign.center,
           ),
         ],
