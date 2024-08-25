@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
+import 'package:kapil_portfolio/core/const/constants.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
 import 'package:kapil_portfolio/core/model/index.dart';
 import 'package:kapil_portfolio/core/utils/helper.dart';
@@ -58,7 +59,12 @@ class IntroCard extends StatelessWidget {
                     Row(
                       children: [
                         FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Scrollable.ensureVisible(
+                              NavigationKey.contactKey.currentContext!,
+                              duration: const Duration(seconds: 1),
+                            );
+                          },
                           style: AppCss.buttonStyle,
                           child: Text(
                             "Hire Me!",

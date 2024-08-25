@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
+import 'package:kapil_portfolio/core/model/index.dart';
 import 'package:kapil_portfolio/core/utils/helper.dart';
 
 class RecentWork extends StatelessWidget {
@@ -37,15 +38,14 @@ class RecentWork extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Our Success Stories",
+            WorkModel.title,
             style: AppCss.h2.copyWith(
               color: CustomColors.c1,
             ),
           ),
           const VSpace(16),
           Text(
-            "Explore our recent client success stories and "
-            "\nwitness our full 360 transformations come to life",
+            WorkModel.description,
             style: AppCss.bodyL,
             textAlign: TextAlign.center,
           ),
@@ -57,16 +57,16 @@ class RecentWork extends StatelessWidget {
             mainAxisSpacing: 18,
             crossAxisSpacing: 18,
             padding: const EdgeInsets.only(bottom: 100),
-            itemCount: items.length,
+            itemCount: WorkModel.workList.length,
             itemBuilder: (context, index) {
-              String image = items[index];
+              Map<String, dynamic> work = WorkModel.workList[index];
 
               return ClipRRect(
                 borderRadius: BorderRadius.circular(18),
                 child: Stack(
                   children: [
                     // Image
-                    Image.network(image),
+                    Image.network(work['image']),
 
                     // Description
                     Positioned(
@@ -75,7 +75,7 @@ class RecentWork extends StatelessWidget {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: () {
-                            openUrl("https://play.google.com/store/games?hl=en-IN");
+                            openUrl(work['link']);
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -94,7 +94,7 @@ class RecentWork extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Pran Spandan",
+                                      work['title'],
                                       style: AppCss.h7.copyWith(
                                         color: Colors.white,
                                       ),
@@ -104,7 +104,7 @@ class RecentWork extends StatelessWidget {
                                 ),
                                 const VSpace(4),
                                 Text(
-                                  "Mobile application build for Android & iOS",
+                                  work['description'],
                                   style: AppCss.bodyXS.copyWith(
                                     color: Colors.white,
                                   ),

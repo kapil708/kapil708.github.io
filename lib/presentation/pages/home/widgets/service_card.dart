@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
@@ -49,6 +49,43 @@ class ServiceCard extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const VSpace(64),
+
+          // Wrap(
+          //   spacing: 16,
+          //   children: [
+          //     ...ServiceModel.serviceList.map((service) {
+          //       return Container(
+          //         width: (contentWidth - 48) / 4,
+          //         padding: const EdgeInsets.all(16),
+          //         //margin: const EdgeInsets.all(8),
+          //         color: Colors.grey.shade200,
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Image.network(
+          //               service['image'],
+          //               // width: 200,
+          //             ),
+          //             const VSpace(16),
+          //             Text(
+          //               service['title'],
+          //               style: AppCss.h7.copyWith(
+          //                 color: CustomColors.c1,
+          //               ),
+          //             ),
+          //             const VSpace(16),
+          //             Text(
+          //               service['subTitle'],
+          //               style: AppCss.h4.copyWith(
+          //                 color: CustomColors.c1,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     }),
+          //   ],
+          // ),
 
           // Service
           ...ServiceModel.serviceList.map((service) {

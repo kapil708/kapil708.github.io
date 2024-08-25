@@ -272,7 +272,8 @@ class ContactCard extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+          const VSpace(84),
         ],
       ),
     );
