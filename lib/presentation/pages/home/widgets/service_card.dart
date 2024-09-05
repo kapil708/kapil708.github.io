@@ -50,43 +50,6 @@ class ServiceCard extends StatelessWidget {
           ),
           const VSpace(64),
 
-          // Wrap(
-          //   spacing: 16,
-          //   children: [
-          //     ...ServiceModel.serviceList.map((service) {
-          //       return Container(
-          //         width: (contentWidth - 48) / 4,
-          //         padding: const EdgeInsets.all(16),
-          //         //margin: const EdgeInsets.all(8),
-          //         color: Colors.grey.shade200,
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Image.network(
-          //               service['image'],
-          //               // width: 200,
-          //             ),
-          //             const VSpace(16),
-          //             Text(
-          //               service['title'],
-          //               style: AppCss.h7.copyWith(
-          //                 color: CustomColors.c1,
-          //               ),
-          //             ),
-          //             const VSpace(16),
-          //             Text(
-          //               service['subTitle'],
-          //               style: AppCss.h4.copyWith(
-          //                 color: CustomColors.c1,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       );
-          //     }),
-          //   ],
-          // ),
-
           // Service
           ...ServiceModel.serviceList.map((service) {
             int index = ServiceModel.serviceList.indexWhere((s) => s['title'] == service['title']);

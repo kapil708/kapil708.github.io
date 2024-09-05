@@ -15,13 +15,27 @@ class IntroCard extends StatelessWidget {
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
     return Container(
-      color: const Color(0xFFF6F3Fc),
+      // color: const Color(0xFFF6F3Fc),
       width: windowWidth,
       padding: EdgeInsets.only(
         left: AppCss.kBodyPaddingHorizontal,
         right: AppCss.kBodyPaddingHorizontal,
         top: AppCss.kBodyPaddingTop,
         bottom: AppCss.kBodyPaddingBottom,
+      ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: <Color>[
+            Color(0xffEBF4F5),
+            Color(0xffB5C6E0),
+
+            // Color(0xffF6C4ED),
+            // Color(0xffE1DAE6),
+          ], // Gradient from https://learnui.design/tools/gradient-generator.html
+          tileMode: TileMode.mirror,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

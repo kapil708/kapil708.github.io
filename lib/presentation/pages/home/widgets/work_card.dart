@@ -75,7 +75,73 @@ class RecentWork extends StatelessWidget {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: () {
-                            openUrl(work['link']);
+                            // openUrl(work['link']);
+                            Scaffold.of(context).openEndDrawer();
+                            return;
+
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  scrollable: true,
+                                  title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text("Pran Spandan"),
+                                      IconButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        icon: const Icon(Icons.close),
+                                      ),
+                                    ],
+                                  ),
+                                  content: Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    width: MediaQuery.sizeOf(context).width * 0.5,
+                                    // height: MediaQuery.sizeOf(context).width * 0.7,
+                                    child: Column(
+                                      children: [
+                                        Image.network("https://miro.medium.com/v2/resize:fit:4800/format:webp/1*wIRL9yjwE8xg_272PVEvKQ.png"),
+                                        const VSpace(16),
+                                        const Text(
+                                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+                                          "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
+                                          "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+                                          "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                        ),
+                                        const VSpace(16),
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () => openUrl(""),
+                                              child: Image.asset(
+                                                "assets/images/app_store.png",
+                                                width: 150,
+                                              ),
+                                            ),
+                                            const HSpace(16),
+                                            GestureDetector(
+                                              onTap: () => openUrl(""),
+                                              child: Image.asset(
+                                                "assets/images/google_play.png",
+                                                width: 150,
+                                              ),
+                                            ),
+                                            const HSpace(16),
+                                            GestureDetector(
+                                              onTap: () => openUrl(""),
+                                              child: Image.asset(
+                                                "assets/images/open_link.png",
+                                                width: 150,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
