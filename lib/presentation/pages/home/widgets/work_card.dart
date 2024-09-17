@@ -9,22 +9,26 @@ import 'package:kapil_portfolio/core/utils/helper.dart';
 class RecentWork extends StatelessWidget {
   const RecentWork({super.key});
 
+  String icon(String type) {
+    switch (type) {
+      case 'android':
+        return 'assets/images/icons/android.png';
+      case 'iOS':
+        return 'assets/images/icons/ios.png';
+      case 'restAPI':
+        return 'assets/images/icons/api.png';
+      case 'firebase':
+        return 'assets/images/icons/firebase.png';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.sizeOf(context).width;
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
     double cardWidth = (contentWidth - 36) / 3;
-
-    List<String> items = [
-      'https://themejunction.net/html/gerold/demo/assets/img/portfolio/2.jpg',
-      'https://preview.codeless.co/converta/default/wp-content/uploads/elementor/thumbs/portfolio-0021-min-q2okalu3k4bdd90gr0ub8uiep3zjut7ilyt9o1mc3o.jpeg',
-      'https://preview.codeless.co/converta/default/wp-content/uploads/elementor/thumbs/portfolio-001-min-q2okaj0nfbr8p8rgd5zupb8q7xwazgde671hh3n0lg.jpeg',
-      'https://preview.codeless.co/converta/default/wp-content/uploads/elementor/thumbs/portfolio-003-min-q2okaonm4mf8c2wdak26ybssh9lnhwipmcrq3vi5l0.jpeg',
-      'https://preview.codeless.co/converta/default/wp-content/uploads/elementor/thumbs/portfolio-0004-min-q2okarh74u2tlqf5zrnhtr3vkeqlwqaz7cwuslah1g.jpeg',
-      'https://kylo.bold-themes.com/boldbuilder-demo/wp-content/uploads/sites/2/2023/09/portfolio_10-900x1200.jpg',
-      'https://kylo.bold-themes.com/boldbuilder-demo/wp-content/uploads/sites/2/2024/05/portfolio-11-900x1200.jpg',
-      'https://themejunction.net/html/gerold/demo/assets/img/portfolio/4.jpg',
-    ];
 
     return Container(
       color: const Color(0xFFFFEFEF),
@@ -60,13 +64,14 @@ class RecentWork extends StatelessWidget {
             itemCount: WorkModel.workList.length,
             itemBuilder: (context, index) {
               Map<String, dynamic> work = WorkModel.workList[index];
+              List<String> techStack = work['techStack'];
 
               return ClipRRect(
                 borderRadius: BorderRadius.circular(18),
                 child: Stack(
                   children: [
                     // Image
-                    Image.network(work['image']),
+                    Image.network(work['thumbImage']),
 
                     // Description
                     Positioned(
@@ -74,75 +79,7 @@ class RecentWork extends StatelessWidget {
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
-                          onTap: () {
-                            // openUrl(work['link']);
-                            Scaffold.of(context).openEndDrawer();
-                            return;
-
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  scrollable: true,
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text("Pran Spandan"),
-                                      IconButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        icon: const Icon(Icons.close),
-                                      ),
-                                    ],
-                                  ),
-                                  content: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    width: MediaQuery.sizeOf(context).width * 0.5,
-                                    // height: MediaQuery.sizeOf(context).width * 0.7,
-                                    child: Column(
-                                      children: [
-                                        Image.network("https://miro.medium.com/v2/resize:fit:4800/format:webp/1*wIRL9yjwE8xg_272PVEvKQ.png"),
-                                        const VSpace(16),
-                                        const Text(
-                                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                                          "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "
-                                          "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
-                                          "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                                        ),
-                                        const VSpace(16),
-                                        Row(
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () => openUrl(""),
-                                              child: Image.asset(
-                                                "assets/images/app_store.png",
-                                                width: 150,
-                                              ),
-                                            ),
-                                            const HSpace(16),
-                                            GestureDetector(
-                                              onTap: () => openUrl(""),
-                                              child: Image.asset(
-                                                "assets/images/google_play.png",
-                                                width: 150,
-                                              ),
-                                            ),
-                                            const HSpace(16),
-                                            GestureDetector(
-                                              onTap: () => openUrl(""),
-                                              child: Image.asset(
-                                                "assets/images/open_link.png",
-                                                width: 150,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                          onTap: () => workDetailPopup(context, work),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                             //margin: const EdgeInsets.all(8),
@@ -150,7 +87,7 @@ class RecentWork extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.white54, width: 2),
                               borderRadius: BorderRadius.circular(18),
-                              color: Colors.black54,
+                              color: Colors.black87,
                               // color: CustomColors.c2.withOpacity(0.8),
                             ),
                             child: Column(
@@ -169,11 +106,24 @@ class RecentWork extends StatelessWidget {
                                   ],
                                 ),
                                 const VSpace(4),
-                                Text(
-                                  work['description'],
-                                  style: AppCss.bodyXS.copyWith(
-                                    color: Colors.white,
-                                  ),
+                                Wrap(
+                                  spacing: 4,
+                                  children: [
+                                    ...techStack.map((t) {
+                                      return Container(
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                        child: Image.asset(
+                                          icon(t),
+                                          height: 18,
+                                          width: 18,
+                                        ),
+                                      );
+                                    }),
+                                  ],
                                 ),
                               ],
                             ),
@@ -188,6 +138,75 @@ class RecentWork extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  workDetailPopup(BuildContext context, Map<String, dynamic> data) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // scrollable: true,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(data['title']),
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              width: MediaQuery.sizeOf(context).width * 0.5,
+              // height: MediaQuery.sizeOf(context).width * 0.7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.network(data['image']),
+                  const VSpace(16),
+                  Text(data['description']),
+                  const VSpace(16),
+                  Row(
+                    children: [
+                      if (data['androidLink'] != null && data['androidLink'].toString().isNotEmpty) ...[
+                        GestureDetector(
+                          onTap: () => openUrl(data['androidLink']),
+                          child: Image.asset(
+                            "assets/images/app_store.png",
+                            width: 150,
+                          ),
+                        ),
+                        const HSpace(16),
+                      ],
+                      if (data['iOSLink'] != null && data['iOSLink'].toString().isNotEmpty) ...[
+                        GestureDetector(
+                          onTap: () => openUrl(data['iOSLink']),
+                          child: Image.asset(
+                            "assets/images/google_play.png",
+                            width: 150,
+                          ),
+                        ),
+                        const HSpace(16),
+                      ],
+                      if (data['websiteLink'] != null && data['websiteLink'].toString().isNotEmpty)
+                        GestureDetector(
+                          onTap: () => openUrl(data['websiteLink']),
+                          child: Image.asset(
+                            "assets/images/open_link.png",
+                            width: 150,
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
