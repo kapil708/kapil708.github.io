@@ -15,6 +15,19 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        titleTextStyle: AppCss.bodyS,
+        backgroundColor: const Color(0xFFf6f3fc),
+        elevation: 0,
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("This site is under development."),
+            Text("Supports Only Web View"),
+            Text("Build Using Flutter"),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
