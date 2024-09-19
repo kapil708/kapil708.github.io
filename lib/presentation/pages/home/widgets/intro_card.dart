@@ -20,7 +20,7 @@ class IntroCard extends StatelessWidget {
       padding: EdgeInsets.only(
         left: AppCss.kBodyPaddingHorizontal,
         right: AppCss.kBodyPaddingHorizontal,
-        top: AppCss.kBodyPaddingTop,
+        // top: AppCss.kBodyPaddingTop,
         bottom: AppCss.kBodyPaddingBottom,
       ),
       decoration: const BoxDecoration(
@@ -81,125 +81,61 @@ class IntroCard extends StatelessWidget {
                           },
                           style: AppCss.buttonStyle,
                           child: Text(
-                            "Hire Me!",
+                            "👨‍💻Hire Me Now",
                             style: AppCss.body,
                           ),
                         ),
-                        const HSpace(32),
-                        ...IntroModel.socialLinks.map((socialLink) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 16),
-                            child: OutlinedButton(
-                              onPressed: () => openUrl(socialLink['link']),
-                              style: IconButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
-                                  side: const BorderSide(color: CustomColors.primary),
-                                ),
-                                minimumSize: const Size(48, 48),
-                              ),
-                              child: Image.asset(
-                                socialLink['image'],
-                                height: 24,
-                                width: 24,
-                              ),
-                            ),
-                          );
-                        }),
+                        const HSpace(16),
+                        FilledButton(
+                          onPressed: () => openUrl(IntroModel.calendlyLink),
+                          style: AppCss.buttonStyle.copyWith(
+                            backgroundColor: WidgetStateProperty.all(Colors.black),
+                          ),
+                          child: Text(
+                            "🗓️Schedule A Call",
+                            style: AppCss.body,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                width: contentWidth * 0.5,
-                child: Image.asset(
-                  IntroModel.profilePicture,
-                  height: 600,
-                ),
-                // child: Image.network("https://themejunction.net/html/gerold/demo/assets/img/hero/me.png"),
+              Stack(
+                children: [
+                  SizedBox(
+                    width: contentWidth * 0.5,
+                    height: contentWidth * 0.5,
+                    child: Center(
+                      child: ClipOval(
+                        child: Image.asset(
+                          IntroModel.profilePictureSquare,
+                          width: contentWidth * 0.4,
+                          height: contentWidth * 0.4,
+                          // fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Image.network(
+                          "https://juststickers.in/wp-content/uploads/2019/01/flutter.png",
+                          height: 24,
+                          width: 24,
+                        ),
+                        const Text("Build with ❤️"),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-
-          // Records
-          const VSpace(32),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ...IntroModel.records.map((record) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      record['count'],
-                      style: AppCss.h1.copyWith(
-                        color: CustomColors.c2,
-                      ),
-                    ),
-                    const HSpace(8),
-                    Text(
-                      record['title'],
-                      style: AppCss.body.copyWith(
-                        color: CustomColors.c2,
-                      ),
-                    ),
-                  ],
-                );
-              }),
-            ],
-          ),
-
-          // Trusted by
-          // const VSpace(64),
-          // Center(
-          //   child: Text(
-          //     "Some Brands We Work With",
-          //     style: AppCss.h5.copyWith(
-          //       color: CustomColors.c1,
-          //     ),
-          //   ),
-          // ),
-          // const VSpace(16),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://4106085.fs1.hubspotusercontent-na1.net/hub/4106085/hubfs/neu_Care%20Rockets.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://www.fastwhistle.com/assets/img/fastwhistle.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://omtapovan.org/wp-content/uploads/main_round.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network(
-          //           "https://scontent.famd5-2.fna.fbcdn.net/v/t39.30808-1/273454088_101439172467347_6173678911554987289_n.jpg?stp=dst-jpg_s480x480&_nc_cat=104&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=3J6_rR1eplcQ7kNvgHulFMi&_nc_ht=scontent.famd5-2.fna&oh=00_AYBYigKY1GUYZARpB3_G6kRRbi_SndE_yYIA3g697_4mpQ&oe=66CB4EAD"),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

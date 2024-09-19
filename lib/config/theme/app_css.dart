@@ -30,6 +30,9 @@ class AppCss {
   static TextStyle get bodyXS => sora.size(12).textHeight(1.30);
 
   static ButtonStyle buttonStyle = FilledButton.styleFrom(
-    padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
   );
 }

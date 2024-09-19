@@ -3,11 +3,7 @@ import 'package:kapil_portfolio/config/theme/app_css.dart';
 import 'package:kapil_portfolio/config/theme/app_theme.dart';
 import 'package:kapil_portfolio/core/const/constants.dart';
 import 'package:kapil_portfolio/core/extensions/spacing.dart';
-import 'package:kapil_portfolio/presentation/pages/home/widgets/contact_card.dart';
-import 'package:kapil_portfolio/presentation/pages/home/widgets/intro_card.dart';
-import 'package:kapil_portfolio/presentation/pages/home/widgets/service_card.dart';
-import 'package:kapil_portfolio/presentation/pages/home/widgets/storie_card.dart';
-import 'package:kapil_portfolio/presentation/pages/home/widgets/work_card.dart';
+import 'package:kapil_portfolio/presentation/pages/home/widgets/projects_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,27 +11,31 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleTextStyle: AppCss.bodyS,
-        backgroundColor: const Color(0xFFf6f3fc),
-        elevation: 0,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("This site is under development."),
-            Text("Supports Only Web View"),
-            Text("Build Using Flutter"),
-          ],
-        ),
-      ),
+      // appBar: AppBar(
+      //   titleTextStyle: AppCss.bodyS,
+      //   backgroundColor: const Color(0xFFf6f3fc),
+      //   elevation: 0,
+      //   title: const Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       Text("This site is under development."),
+      //       Text("Supports Only Web View"),
+      //       Text("Build Using Flutter"),
+      //     ],
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            IntroCard(key: NavigationKey.introKey),
-            ServiceCard(key: NavigationKey.serviceKey),
-            RecentWork(key: NavigationKey.workKey),
-            StoriesCard(key: NavigationKey.testimonialKey),
-            ContactCard(key: NavigationKey.contactKey),
+            // IntroCard(key: NavigationKey.introKey),
+            // AboutCard(key: NavigationKey.aboutKey),
+            // SkillsCard(key: NavigationKey.skillsKey),
+            // ServicesCard(key: NavigationKey.serviceKey),
+            ProjectsCard(key: NavigationKey.serviceKey),
+            // ServiceCard(key: NavigationKey.serviceKey),
+            // RecentWork(key: NavigationKey.workKey),
+            // StoriesCard(key: NavigationKey.testimonialKey),
+            // ContactCard(key: NavigationKey.contactKey),
             // const BlogCard(),
           ],
         ),
