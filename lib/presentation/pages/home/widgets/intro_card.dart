@@ -12,41 +12,44 @@ class IntroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.sizeOf(context).width;
+    double windowHeight = MediaQuery.sizeOf(context).height;
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
-    return Container(
-      // color: const Color(0xFFF6F3Fc),
-      width: windowWidth,
-      padding: EdgeInsets.only(
-        left: AppCss.kBodyPaddingHorizontal,
-        right: AppCss.kBodyPaddingHorizontal,
-        top: AppCss.kBodyPaddingTop,
-        bottom: AppCss.kBodyPaddingBottom,
-      ),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: <Color>[
-            Color(0xffEBF4F5),
-            Color(0xffB5C6E0),
+    return Stack(
+      children: [
+        Container(
+          // color: const Color(0xFFF6F3Fc),
+          width: windowWidth,
+          // height: windowHeight,
+          padding: EdgeInsets.only(
+            left: AppCss.kBodyPaddingHorizontal,
+            right: AppCss.kBodyPaddingHorizontal,
+            top: AppCss.kBodyPaddingTop,
+            bottom: AppCss.kBodyPaddingBottom,
+          ),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color(0xffEBF4F5),
+                Color(0xffB5C6E0),
 
-            // Color(0xffF6C4ED),
-            // Color(0xffE1DAE6),
-          ], // Gradient from https://learnui.design/tools/gradient-generator.html
-          tileMode: TileMode.mirror,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Welcome message & image
-          Row(
+                // Color(0xffF6C4ED),
+                // Color(0xffE1DAE6),
+              ], // Gradient from https://learnui.design/tools/gradient-generator.html
+              tileMode: TileMode.mirror,
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              //Basic Info
               SizedBox(
                 width: contentWidth * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       IntroModel.subTitle,
@@ -81,127 +84,54 @@ class IntroCard extends StatelessWidget {
                           },
                           style: AppCss.buttonStyle,
                           child: Text(
-                            "Hire Me!",
-                            style: AppCss.body,
+                            "👨‍💻 Hire Me Now",
+                            style: AppCss.bodyL,
                           ),
                         ),
-                        const HSpace(32),
-                        ...IntroModel.socialLinks.map((socialLink) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 16),
-                            child: OutlinedButton(
-                              onPressed: () => openUrl(socialLink['link']),
-                              style: IconButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
-                                  side: const BorderSide(color: CustomColors.primary),
-                                ),
-                                minimumSize: const Size(48, 48),
-                              ),
-                              child: Image.asset(
-                                socialLink['image'],
-                                height: 24,
-                                width: 24,
-                              ),
-                            ),
-                          );
-                        }),
+                        const HSpace(16),
+                        FilledButton(
+                          onPressed: () => openUrl(IntroModel.calendlyLink),
+                          style: AppCss.buttonStyle.copyWith(
+                            backgroundColor: WidgetStateProperty.all(Colors.black),
+                          ),
+                          child: Text(
+                            "🗓️ Schedule A Call",
+                            style: AppCss.bodyL,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
+
+              // Image
               SizedBox(
                 width: contentWidth * 0.5,
-                child: Image.asset(
-                  IntroModel.profilePicture,
-                  height: 600,
+                child: Center(
+                  child: Image.asset(
+                    IntroModel.profilePictureSquare,
+                    width: contentWidth * 0.4,
+                    height: contentWidth * 0.4,
+                    // fit: BoxFit.contain,
+                  ),
                 ),
-                // child: Image.network("https://themejunction.net/html/gerold/demo/assets/img/hero/me.png"),
               ),
             ],
           ),
+        ),
 
-          // Records
-          const VSpace(32),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ...IntroModel.records.map((record) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      record['count'],
-                      style: AppCss.h1.copyWith(
-                        color: CustomColors.c2,
-                      ),
-                    ),
-                    const HSpace(8),
-                    Text(
-                      record['title'],
-                      style: AppCss.body.copyWith(
-                        color: CustomColors.c2,
-                      ),
-                    ),
-                  ],
-                );
-              }),
-            ],
+        //Badge
+        Positioned(
+          right: AppCss.kBodyPaddingHorizontal / 2,
+          top: 0,
+          child: Image.asset(
+            "assets/images/build_with_flutter.png",
+            height: 120,
+            // width: 24,
           ),
-
-          // Trusted by
-          // const VSpace(64),
-          // Center(
-          //   child: Text(
-          //     "Some Brands We Work With",
-          //     style: AppCss.h5.copyWith(
-          //       color: CustomColors.c1,
-          //     ),
-          //   ),
-          // ),
-          // const VSpace(16),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://4106085.fs1.hubspotusercontent-na1.net/hub/4106085/hubfs/neu_Care%20Rockets.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://www.fastwhistle.com/assets/img/fastwhistle.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network("https://omtapovan.org/wp-content/uploads/main_round.png"),
-          //     ),
-          //     Container(
-          //       //padding: const EdgeInsets.only(right: 32),
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 200,
-          //         maxHeight: 100,
-          //       ),
-          //       child: Image.network(
-          //           "https://scontent.famd5-2.fna.fbcdn.net/v/t39.30808-1/273454088_101439172467347_6173678911554987289_n.jpg?stp=dst-jpg_s480x480&_nc_cat=104&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=3J6_rR1eplcQ7kNvgHulFMi&_nc_ht=scontent.famd5-2.fna&oh=00_AYBYigKY1GUYZARpB3_G6kRRbi_SndE_yYIA3g697_4mpQ&oe=66CB4EAD"),
-          //     ),
-          //   ],
-          // ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

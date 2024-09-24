@@ -1,11 +1,11 @@
 {
-    "name": "kapil_portfolio",
-    "short_name": "kapil_portfolio",
+    "name": "kapil singh",
+    "short_name": "kapil singh",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Kapil Singh Portfolio",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
