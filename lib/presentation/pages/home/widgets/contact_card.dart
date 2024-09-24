@@ -124,13 +124,17 @@ class ContactCard extends StatelessWidget {
                         FilledButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              String baseUrl = "https://wa.me/+919033608708?text=";
-                              String msg = "New enquiry \n\n"
-                                  "Person: ${txtName.text.trim()} \n"
+                              String msg = "Person: ${txtName.text.trim()} \n"
                                   "Mobile: ${txtMobile.text.trim()} \n"
                                   "Message: ${txtMessage.text.trim()}";
 
-                              openUrl(baseUrl + msg);
+                              final Uri baseUrl = Uri(
+                                scheme: 'mailto',
+                                path: 'singhkapil708@email.com',
+                                query: 'subject=New Enquiry&body=$msg',
+                              );
+
+                              openUrl(baseUrl.toString());
 
                               txtName.clear();
                               txtMobile.clear();

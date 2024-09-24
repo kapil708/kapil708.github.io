@@ -7,7 +7,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 # versions available, run `flutter pub outdated`.
 dependencies:
@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/icons/
+    - assets/images/projects/
     - assets/svg/
     - assets/fonts/sora/
     - assets/fonts/russoOne/

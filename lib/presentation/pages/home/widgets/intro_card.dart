@@ -12,41 +12,44 @@ class IntroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double windowWidth = MediaQuery.sizeOf(context).width;
+    double windowHeight = MediaQuery.sizeOf(context).height;
     double contentWidth = windowWidth - (AppCss.kBodyPaddingHorizontal * 2);
 
-    return Container(
-      // color: const Color(0xFFF6F3Fc),
-      width: windowWidth,
-      padding: EdgeInsets.only(
-        left: AppCss.kBodyPaddingHorizontal,
-        right: AppCss.kBodyPaddingHorizontal,
-        // top: AppCss.kBodyPaddingTop,
-        bottom: AppCss.kBodyPaddingBottom,
-      ),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: <Color>[
-            Color(0xffEBF4F5),
-            Color(0xffB5C6E0),
+    return Stack(
+      children: [
+        Container(
+          // color: const Color(0xFFF6F3Fc),
+          width: windowWidth,
+          // height: windowHeight,
+          padding: EdgeInsets.only(
+            left: AppCss.kBodyPaddingHorizontal,
+            right: AppCss.kBodyPaddingHorizontal,
+            top: AppCss.kBodyPaddingTop,
+            bottom: AppCss.kBodyPaddingBottom,
+          ),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color(0xffEBF4F5),
+                Color(0xffB5C6E0),
 
-            // Color(0xffF6C4ED),
-            // Color(0xffE1DAE6),
-          ], // Gradient from https://learnui.design/tools/gradient-generator.html
-          tileMode: TileMode.mirror,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Welcome message & image
-          Row(
+                // Color(0xffF6C4ED),
+                // Color(0xffE1DAE6),
+              ], // Gradient from https://learnui.design/tools/gradient-generator.html
+              tileMode: TileMode.mirror,
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              //Basic Info
               SizedBox(
                 width: contentWidth * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       IntroModel.subTitle,
@@ -81,8 +84,8 @@ class IntroCard extends StatelessWidget {
                           },
                           style: AppCss.buttonStyle,
                           child: Text(
-                            "👨‍💻Hire Me Now",
-                            style: AppCss.body,
+                            "👨‍💻 Hire Me Now",
+                            style: AppCss.bodyL,
                           ),
                         ),
                         const HSpace(16),
@@ -92,8 +95,8 @@ class IntroCard extends StatelessWidget {
                             backgroundColor: WidgetStateProperty.all(Colors.black),
                           ),
                           child: Text(
-                            "🗓️Schedule A Call",
-                            style: AppCss.body,
+                            "🗓️ Schedule A Call",
+                            style: AppCss.bodyL,
                           ),
                         ),
                       ],
@@ -101,43 +104,34 @@ class IntroCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Stack(
-                children: [
-                  SizedBox(
-                    width: contentWidth * 0.5,
-                    height: contentWidth * 0.5,
-                    child: Center(
-                      child: ClipOval(
-                        child: Image.asset(
-                          IntroModel.profilePictureSquare,
-                          width: contentWidth * 0.4,
-                          height: contentWidth * 0.4,
-                          // fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
+
+              // Image
+              SizedBox(
+                width: contentWidth * 0.5,
+                child: Center(
+                  child: Image.asset(
+                    IntroModel.profilePictureSquare,
+                    width: contentWidth * 0.4,
+                    height: contentWidth * 0.4,
+                    // fit: BoxFit.contain,
                   ),
-                  Positioned(
-                    right: 0,
-                    top: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Image.network(
-                          "https://juststickers.in/wp-content/uploads/2019/01/flutter.png",
-                          height: 24,
-                          width: 24,
-                        ),
-                        const Text("Build with ❤️"),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+
+        //Badge
+        Positioned(
+          right: AppCss.kBodyPaddingHorizontal / 2,
+          top: 0,
+          child: Image.asset(
+            "assets/images/build_with_flutter.png",
+            height: 120,
+            // width: 24,
+          ),
+        ),
+      ],
     );
   }
 }

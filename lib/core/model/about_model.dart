@@ -39,24 +39,19 @@ class AboutModel {
           'link': 'https://www.linkedin.com/in/kapilrsingh',
         },
         {
-          'title': 'Github',
-          'image': 'https://cdn-icons-png.flaticon.com/128/25/25657.png',
-          'link': 'https://github.com/kapil708',
-        },
-        {
           'title': 'Instagram',
           'image': 'https://cdn-icons-png.flaticon.com/128/2111/2111463.png',
           'link': 'https://www.instagram.com/insightsbykapil',
         },
         {
-          'title': 'Facebook',
-          'image': 'https://cdn-icons-png.flaticon.com/128/733/733547.png',
-          'link': 'https://www.facebook.com/kapil.singh.35574',
-        },
-        {
           'title': 'Twitter',
           'image': 'https://cdn-icons-png.flaticon.com/128/3256/3256013.png',
           'link': 'https://x.com/KRSINGH708',
+        },
+        {
+          'title': 'Github',
+          'image': 'https://cdn-icons-png.flaticon.com/128/25/25657.png',
+          'link': 'https://github.com/kapil708',
         },
         {
           'title': 'Stackoverflow',
