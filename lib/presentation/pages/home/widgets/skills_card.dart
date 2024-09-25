@@ -38,41 +38,6 @@ class SkillsCard extends StatelessWidget {
             style: AppCss.bodyL,
             //style: Theme.of(context).textTheme.titleLarge,
           ),
-          // const VSpace(16),
-          // // Welcome message & image
-          // Wrap(
-          //   // crossAxisAlignment: CrossAxisAlignment.start,
-          //   spacing: 16,
-          //   runSpacing: 16,
-          //   children: [
-          //     ...SkillModel.skillList.map((data) {
-          //       return Container(
-          //         height: 120,
-          //         width: 120,
-          //         decoration: BoxDecoration(
-          //           color: Colors.white54,
-          //           borderRadius: BorderRadius.circular(8),
-          //         ),
-          //         child: Column(
-          //           mainAxisAlignment: MainAxisAlignment.center,
-          //           children: [
-          //             SvgPicture.asset(
-          //               data['image'],
-          //               height: 48,
-          //               width: 48,
-          //             ),
-          //             const VSpace(8),
-          //             Text(
-          //               data['title'],
-          //               style: AppCss.lead,
-          //             ),
-          //           ],
-          //         ),
-          //       );
-          //     }),
-          //   ],
-          // ),
-
           const VSpace(64),
           Wrap(
             spacing: spacing,
@@ -96,9 +61,11 @@ class SkillsCard extends StatelessWidget {
                         width: 48,
                       ),
                       const HSpace(8),
-                      Text(
-                        data['title'],
-                        style: AppCss.lead,
+                      Expanded(
+                        child: Text(
+                          data['title'],
+                          style: AppCss.lead,
+                        ),
                       ),
                     ],
                   ),
